@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sport</string>
+    <string name="Register">تسجيل</string>
+    <string name="c_password">تأكيد كلمة المرور</string>
+    <string name="date_birth">تاريخ الميلاد</string>
+    <string name="email">البريد الالكتروني</string>
+    <string name="f_name">الاسم الاول</string>
+    <string name="female">انثى</string>
+    <string name="l_name">اسم العائلة</string>
+    <string name="male">ذكر</string>
+    <string name="password">كلمة المرور</string>
+    <string name="phone">رقم الهاتف</string>
+    <string name="sign_up">مستخدم جديد</string>
+    <string name="team_name">اسم الفريق</string>
+    <string name="user_image">اختر صورتك الشخصية</string>
+
+    <string-array name="governorate">
+        <item>اختر المحافظة ...</item>
+        <item>عمان</item>
+        <item>اربد</item>
+        <item>البلقاء</item>
+        <item>جرش</item>
+        <item>الزرقاء</item>
+        <item>الطفيلة</item>
+        <item>عجلون</item>
+        <item>العقبة</item>
+        <item>الكرك</item>
+        <item>مادبا</item>
+        <item>معان</item>
+        <item>المفرق</item>
+
+
+    </string-array>
+</resources>

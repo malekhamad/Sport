@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Sport</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="f_name">First Name</string>
+    <string name="l_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="c_password">Confirm Password</string>
+    <string name="phone">Phone Number</string>
+    <string name="date_birth">Date Of Birth</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="Register">Register</string>
+    <string name="user_image">Select Your Picture</string>
+    <string name="team_name">Team Name</string>
+    <string name="sign_up">SignUp</string>
+
+    <string-array name="governorate">
+        <item>select governorate ...</item>
+        <item>Amman</item>
+        <item>Irbid</item>
+        <item>Balqa</item>
+        <item>Jarash</item>
+        <item>Zarqa</item>
+        <item>Tafila</item>
+        <item>Ajloun</item>
+        <item>Aqaba</item>
+        <item>Karak</item>
+        <item>Madaba</item>
+        <item>Maan</item>
+        <item>Mafraq</item>
+    </string-array>
+</resources>
