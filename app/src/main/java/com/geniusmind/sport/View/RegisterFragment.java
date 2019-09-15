@@ -17,6 +17,7 @@ import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,10 +25,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.geniusmind.sport.ContractClass;
+import com.geniusmind.sport.Helper.Preferences;
+import com.geniusmind.sport.Model.LoginCallback;
 import com.geniusmind.sport.Model.UserRegister;
 import com.geniusmind.sport.R;
 import com.geniusmind.sport.ViewModel.RegisterViewModel;
 import com.geniusmind.sport.databinding.FragmentRegisterBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -39,6 +43,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -71,7 +79,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         binding.registerBtn.setOnClickListener(this);
         binding.imageUser.setOnClickListener(this);
         binding.dateBirth.setOnClickListener(this);
-
+        binding.signinLabel.setOnClickListener(this);
 
 
 
@@ -92,45 +100,48 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             case 0:
                 break;
             case 1:
-                binding.fNameLayout.setError("First name is required !");
+                binding.fNameLayout.setError(getString(R.string.fName_required));
 
                 break;
             case 2:
-                binding.lNameLayout.setError("Last name is required !");
+                binding.lNameLayout.setError(getString(R.string.lname_required));
 
                 break;
             case 3:
-                binding.teamNameLayout.setError("Team name is required !");
+                binding.teamNameLayout.setError(getString(R.string.teamName_required));
 
                 break;
             case 4:
-                binding.passwordLayout.setError("Password is required !");
-
+                binding.emailLayout.setError(getString(R.string.email_required));
                 break;
             case 5:
-                binding.cPasswordLayout.setError("Confirm Password is required !");
+                binding.passwordLayout.setError(getString(R.string.password_required));
 
                 break;
             case 6:
-                binding.dateBirthLayout.setError("Date of birth is required !");
+                binding.cPasswordLayout.setError(getString(R.string.c_password_required));
 
                 break;
             case 7:
-                binding.phoneNumberLayout.setError("Phone Number is required !");
+                binding.dateBirthLayout.setError(getString(R.string.date_required));
+
                 break;
             case 8:
-                Toast.makeText(getActivity(), "اختر المحافظة من فضلك", Toast.LENGTH_SHORT).show();
+                binding.phoneNumberLayout.setError(getString(R.string.phone_required));
                 break;
-            case 9 :
-                Toast.makeText(getActivity(), "اختر صورتك الشخصية من فضلك !", Toast.LENGTH_SHORT).show();
+            case 9:
+                Toast.makeText(getActivity(), getString(R.string.choose_governorate), Toast.LENGTH_SHORT).show();
                 break;
-            case 10:
-                binding.passwordLayout.setError("Your password is less than 8 character !");
+            case 10 :
+                Toast.makeText(getActivity(), getString(R.string.select_image), Toast.LENGTH_SHORT).show();
                 break;
             case 11:
-                binding.cPasswordLayout.setError("Password and Confirm password does not match !");
+                binding.passwordLayout.setError(getString(R.string.pass_less_8));
+                break;
             case 12:
-                binding.phoneNumberLayout.setError("Please Put Your Phone Number Correctly !");
+                binding.cPasswordLayout.setError(getString(R.string.password_not_match));
+            case 13:
+                binding.phoneNumberLayout.setError(getString(R.string.phone_incorrect));
                 break;
         }
 
@@ -147,6 +158,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         userrInfo.setC_password(binding.cPassword.getText().toString());
         userrInfo.setGovernorate(binding.govSpinner.getSelectedItem().toString());
         userrInfo.setPhone_number(convertPhone());
+        if(binding.male.isChecked()){
+            userrInfo.setSex(getString(R.string.male));
+        }else {
+            userrInfo.setSex(getString(R.string.female));
+        }
         return userrInfo;
             }
     // convert phone text to string .. . :
@@ -159,7 +175,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(final View view) {
       int id = view.getId();
       switch (id){
           // when click on image user . . . ;
@@ -179,8 +195,67 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
           case R.id.register_btn:
               registerViewModel.setUserInformation(passRegisterInformation());
               registerViewModel.getUserInformation();
-              int errorId = registerViewModel.passDataToTheDatabase();
+              int errorId = registerViewModel.validateViews();
+              if(errorId != 0){
               validateViewsEmpty(errorId);
+              }else {
+                  binding.registerRelativeProgress.setVisibility(View.VISIBLE);
+
+                  registerViewModel.passDataToTheDatabase().enqueue(new Callback<LoginCallback>() {
+                     @Override
+                     public void onResponse(Call<LoginCallback> call, Response<LoginCallback> response) {
+                         String status = response.body().getStatus();
+                         final String user_id = response.body().getId();
+                         switch (status){
+                             case "success":
+                                 Snackbar snackbar = Snackbar
+                                         .make(view,getString(R.string.login_successful),Snackbar.LENGTH_SHORT)
+                                         .addCallback(new Snackbar.Callback(){
+                                             @Override
+                                             public void onShown(Snackbar sb) {
+                                                 Preferences.setPreferences(getActivity(),ContractClass.USER_FILE,ContractClass.USER_ID_KEY,user_id);
+                                                 binding.registerRelativeProgress.setVisibility(View.GONE);
+                                             }
+
+                                             @Override
+                                             public void onDismissed(Snackbar transientBottomBar, int event) {
+                                                 startActivity(new Intent(getActivity(),BasicActvity.class));
+                                                 getActivity().finish();
+                                             }
+                                         });
+                                 snackbar.show();
+
+                                 break;
+                             case "existemail":
+                                 Toast.makeText(view.getContext(), getString(R.string.email_exist), Toast.LENGTH_SHORT).show();
+                                 binding.emailLayout.setError(getString(R.string.email_exist));
+                                 binding.registerRelativeProgress.setVisibility(View.GONE);
+
+                                 break;
+                                 default:
+                                     Toast.makeText(getActivity(),getString(R.string.something_wrong),Toast.LENGTH_LONG).show();
+                                     binding.registerRelativeProgress.setVisibility(View.GONE);
+
+                                     break;
+                         }
+
+                     }
+
+                     @Override
+                     public void onFailure(Call<LoginCallback> call, Throwable t) {
+                         Log.i("Registerfailure",t.getMessage());
+                     }
+                 });
+              }
+
+              break;
+          case R.id.signin_label:
+              FragmentManager manager = getFragmentManager() ;
+              Fragment registerFragment = LoginFragment.getLoginFragment();
+
+              manager.beginTransaction()
+                      .replace(R.id.login_container,registerFragment)
+                      .commit();
               break;
 
 

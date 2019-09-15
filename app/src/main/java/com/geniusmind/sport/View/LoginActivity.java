@@ -21,6 +21,6 @@ public class LoginActivity extends BaseLoginFragment {
 
 
 
-        return registerFragment ;
+        return loginFragment ;
     }
 }

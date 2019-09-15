@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/blueDark</item>
+        <item name="drawerArrowStyle">@style/MyDrawerArrowToggle</item>
     </style>
 
     <style name="Text_Login_Title">
@@ -18,6 +19,10 @@
         <item name="android:layout_marginBottom">8dp</item>
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginEnd">16dp</item>
+    </style>
+
+    <style name="MyDrawerArrowToggle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@color/pf_white</item>
     </style>
 
 

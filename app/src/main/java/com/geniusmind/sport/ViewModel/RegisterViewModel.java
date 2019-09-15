@@ -2,11 +2,17 @@ package com.geniusmind.sport.ViewModel;
 
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.lifecycle.ViewModel;
 
+import com.geniusmind.sport.Model.ClientApi;
+import com.geniusmind.sport.Model.PostRegisterService;
+import com.geniusmind.sport.Model.LoginCallback;
 import com.geniusmind.sport.Model.UserRegister;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterViewModel extends ViewModel {
     UserRegister userInformation ;
@@ -29,25 +35,27 @@ public class RegisterViewModel extends ViewModel {
             return 2;
         }else if (TextUtils.isEmpty(userInformation.getTeam_name())){
             return 3;
-        }else if (TextUtils.isEmpty(userInformation.getPassword())){
+        }else if (TextUtils.isEmpty(userInformation.getEmail())){
             return 4;
-        }else if (TextUtils.isEmpty(userInformation.getC_password())){
+        }else if (TextUtils.isEmpty(userInformation.getPassword())){
             return 5;
-        }else if (TextUtils.isEmpty(userInformation.getDate_birth())){
+        }else if (TextUtils.isEmpty(userInformation.getC_password())){
             return 6;
-        }else if(userInformation.getPhone_number() == 0){
+        }else if (TextUtils.isEmpty(userInformation.getDate_birth())){
             return 7;
+        }else if(userInformation.getPhone_number() == 0){
+            return 8;
         }else if(userInformation.getGovernorate().contains("governorate")
                 || userInformation.getGovernorate().contains("محافظة")){
-           return 8 ;
+           return 9 ;
         }else if(TextUtils.isEmpty(userInformation.getImage_base64())){
-            return 9 ;
+            return 10 ;
         }else if(userInformation.getPassword().length() < 8){
-            return 10;
-        }else if(!userInformation.getPassword().equals(userInformation.getC_password())){
             return 11;
-        }else if(String.valueOf(userInformation.getPhone_number()).length()<9){
+        }else if(!userInformation.getPassword().equals(userInformation.getC_password())){
             return 12;
+        }else if(String.valueOf(userInformation.getPhone_number()).length()<9){
+            return 13;
         }
 
         return 0;
@@ -63,11 +71,14 @@ public class RegisterViewModel extends ViewModel {
 
 
     // pass data to the database .. . ;
-    public int passDataToTheDatabase() {
-        if(validateViews() ==0){
-            Log.i("data","all data is complete");
-            return 0;
-        }
-        return validateViews();
+    public Call<LoginCallback> passDataToTheDatabase() {
+
+            PostRegisterService registerService = ClientApi.getInstance().create(PostRegisterService.class);
+
+            Call<LoginCallback> call = registerService.registerCall(userInformation.getImage_base64(), userInformation.getFname(), userInformation.getLname(), userInformation.getTeam_name(),
+                    userInformation.getEmail(), userInformation.getPassword(), userInformation.getGovernorate(), userInformation.getDate_birth()
+                    , userInformation.getPhone_number(), userInformation.getSex());
+
+       return call;
     }
 }
