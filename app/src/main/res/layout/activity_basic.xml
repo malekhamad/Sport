@@ -32,6 +32,7 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar_basic">
 
             <FrameLayout
+
                 android:id="@+id/basic_container"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -45,10 +46,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
+                 app:headerLayout="@layout/drawer_header"
                 app:menu="@menu/navigation_drawer_item"></com.google.android.material.navigation.NavigationView>
         </androidx.drawerlayout.widget.DrawerLayout>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
+
             android:id="@+id/navigation_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

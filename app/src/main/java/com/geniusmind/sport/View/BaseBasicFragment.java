@@ -2,7 +2,8 @@ package com.geniusmind.sport.View;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,25 +12,42 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentManagerNonConfig;
+import androidx.lifecycle.ViewModelProviders;
 
+import com.geniusmind.sport.Model.UserBasicCallback;
 import com.geniusmind.sport.R;
+import com.geniusmind.sport.ViewModel.BasicViewModel;
 import com.geniusmind.sport.databinding.ActivityBasicBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.internal.NavigationMenu;
 import com.google.android.material.navigation.NavigationView;
 
 public abstract class BaseBasicFragment extends AppCompatActivity  {
     ActivityBasicBinding basicBinding ;
     ActionBarDrawerToggle drawerToggle;
+    BasicViewModel basicViewModel ;
+
     public abstract Fragment getFragment();
 
     public abstract void getFragmentAfterSelected(int id);
+
+
+    public abstract void getUserData(BasicViewModel viewModel);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
      basicBinding = DataBindingUtil.setContentView(this,R.layout.activity_basic);
+
+     basicViewModel= ViewModelProviders.of(this).get(BasicViewModel.class);
+     getUserData(basicViewModel);
+
+
+
+
+
+
+
+
 
      basicBinding.navigationBottom.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
          @Override
