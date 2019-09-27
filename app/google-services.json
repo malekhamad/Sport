@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1055007402411",
+    "firebase_url": "https://sport-e3d3c.firebaseio.com",
+    "project_id": "sport-e3d3c",
+    "storage_bucket": "sport-e3d3c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1055007402411:android:bd27be91f4af533e3e0aee",
+        "android_client_info": {
+          "package_name": "com.geniusmind.sport"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1055007402411-pv4jik6vrpf88f89lahirg940tkiqk7k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.geniusmind.sport",
+            "certificate_hash": "5b2da2355361d6fdf011647a0c04d3fea759b4a3"
+          }
+        },
+        {
+          "client_id": "1055007402411-ehcn1pg8ut8l4r3vgboiv2ibfihuqfe1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbf7EryGMIfuFnrya5b0e-UccJ6bW6c7g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1055007402411-ehcn1pg8ut8l4r3vgboiv2ibfihuqfe1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

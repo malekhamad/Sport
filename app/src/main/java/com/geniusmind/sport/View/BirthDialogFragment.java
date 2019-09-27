@@ -22,7 +22,6 @@ import android.widget.DatePicker;
 
 import com.geniusmind.sport.ContractClass;
 import com.geniusmind.sport.R;
-import com.geniusmind.sport.databinding.FragmentBirthDialogBinding;
 
 import java.text.DateFormat;
 import java.text.ParseException;

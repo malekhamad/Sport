@@ -8,4 +8,8 @@ public class ContractClass {
     // for file preferences . .  . . . ;
     public static final String USER_FILE ="user_preferences";
     public static final String USER_ID_KEY = "user_id_key";
+
+
+    // request code for google authentication . . . ;
+    public static final int RC_SIGN_IN = 458;
 }

@@ -5,4 +5,5 @@ public class ContractUrl {
     public static final String registerEndPoint = "Register.php";
     public static final String loginEndPoint = "login.php";
     public static final String basicEndPoint = "BasicInfo.php";
+    public static final String socialEndPoint = "SocialLogin.php";
 }

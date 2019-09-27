@@ -1,18 +1,15 @@
 package com.geniusmind.sport.ViewModel;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.lifecycle.ViewModel;
 
+import com.geniusmind.sport.Model.ApiInterface;
 import com.geniusmind.sport.Model.ClientApi;
-import com.geniusmind.sport.Model.PostRegisterService;
 import com.geniusmind.sport.Model.LoginCallback;
 import com.geniusmind.sport.Model.UserRegister;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class RegisterViewModel extends ViewModel {
     UserRegister userInformation ;
@@ -73,7 +70,7 @@ public class RegisterViewModel extends ViewModel {
     // pass data to the database .. . ;
     public Call<LoginCallback> passDataToTheDatabase() {
 
-            PostRegisterService registerService = ClientApi.getInstance().create(PostRegisterService.class);
+            ApiInterface registerService = ClientApi.getInstance().create(ApiInterface.class);
 
             Call<LoginCallback> call = registerService.registerCall(userInformation.getImage_base64(), userInformation.getFname(), userInformation.getLname(), userInformation.getTeam_name(),
                     userInformation.getEmail(), userInformation.getPassword(), userInformation.getGovernorate(), userInformation.getDate_birth()

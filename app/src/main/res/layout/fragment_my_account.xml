@@ -5,10 +5,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".View.MyAccountFragment"
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/account_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/progress"
+            />
+
     <ScrollView
+        android:id="@+id/account_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
+        android:visibility="gone"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,5 +44,5 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </ScrollView> </LinearLayout>
 </layout>

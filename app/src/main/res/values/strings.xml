@@ -47,6 +47,9 @@
     <string name="logout">Logout</string>
     <string name="open_drawer">Open</string>
     <string name="close_drawer">Close</string>
+    <string name="or">OR</string>
+    <string name="login_by">Login by</string>
+
 
     <string-array name="governorate">
         <item>select governorate ...</item>

@@ -1,16 +1,12 @@
 package com.geniusmind.sport.ViewModel;
 
-import android.util.Log;
-
 import androidx.lifecycle.ViewModel;
 
+import com.geniusmind.sport.Model.ApiInterface;
 import com.geniusmind.sport.Model.ClientApi;
 import com.geniusmind.sport.Model.LoginCallback;
-import com.geniusmind.sport.Model.PostLoginService;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LoginViewModel extends ViewModel {
     private String email ;
@@ -42,7 +38,7 @@ public class LoginViewModel extends ViewModel {
 
     public Call<LoginCallback> getUserFromDatabase(){
 
-        PostLoginService loginService = ClientApi.getInstance().create(PostLoginService.class);
+        ApiInterface loginService = ClientApi.getInstance().create(ApiInterface.class);
         Call<LoginCallback>call= loginService.loginCall(this.email,this.password);
 
         return call;
