@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Sport</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="f_name">First Name</string>
     <string name="l_name">Last Name</string>
     <string name="email">Email</string>
@@ -49,6 +48,12 @@
     <string name="close_drawer">Close</string>
     <string name="or">OR</string>
     <string name="login_by">Login by</string>
+    <string name="profile_team_name">Team Name</string>
+    <string name="profile_email">Email</string>
+    <string name="profile_governorate">Governorate</string>
+    <string name="profile_date">Date of Birth</string>
+    <string name="profile_phone">Phone Number</string>
+    <string name="my_detail">my detail</string>
 
 
     <string-array name="governorate">
@@ -66,4 +71,7 @@
         <item>Maan</item>
         <item>Mafraq</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

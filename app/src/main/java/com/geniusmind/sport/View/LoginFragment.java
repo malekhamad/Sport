@@ -142,13 +142,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         snackbar.addCallback(new Snackbar.Callback(){
                             @Override
                             public void onDismissed(Snackbar transientBottomBar, int event) {
-                                startActivity(new Intent(getActivity(),BasicActvity.class));
+                                startActivity(new Intent(view.getContext(),BasicActvity.class));
                                 getActivity().finish();
                             }
 
                             @Override
                             public void onShown(Snackbar sb) {
-                                Preferences.setPreferences(getActivity(), ContractClass.USER_FILE,ContractClass.USER_ID_KEY,user_id);
+                                Preferences.setPreferences(view.getContext(), ContractClass.USER_FILE,ContractClass.USER_ID_KEY,user_id);
                                 loginBinding.loginLinearProgress.setVisibility(View.GONE);
                             }
                         });
@@ -221,6 +221,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         // ...
                     }
                 });
+
+
     }
 
 }

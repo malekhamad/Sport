@@ -2,7 +2,10 @@ package com.geniusmind.sport.Model;
 
 import com.geniusmind.sport.ContractUrl;
 
+import java.util.List;
+
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
@@ -37,5 +40,15 @@ public interface ApiInterface {
                                    @Field("email") String email,
                                    @Field("date_birth") String date_birth,
                                    @Field("phone_number") int phone_number);
+
+    // for profile screen . . . . ;
+    @FormUrlEncoded
+    @POST(ContractUrl.profileEndPoint)
+    Call<ProfileCallback> profileCall(@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST(ContractUrl.playgroundEndPoint)
+    Call<List<PlaygroundCallback>> playgroundCall(@Field("id") String id);
+
 }
 

@@ -6,6 +6,11 @@
     xmlns:tools2="http://schemas.android.com/tools"
     >
 
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,21 +20,14 @@
             android:id="@+id/toolbar_basic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primary_blue"
+            android:background="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:title="@string/app_name"
             app:titleTextColor="@color/pf_white"></androidx.appcompat.widget.Toolbar>
 
-        <androidx.drawerlayout.widget.DrawerLayout
-            android:id="@+id/drawer_layout"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/navigation_bottom"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_basic">
+
 
             <FrameLayout
 
@@ -41,22 +39,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar_basic"></FrameLayout>
 
-            <com.google.android.material.navigation.NavigationView
-                android:id="@+id/navigation_drawer"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="start"
-                 app:headerLayout="@layout/drawer_header"
-                app:menu="@menu/navigation_drawer_item"></com.google.android.material.navigation.NavigationView>
-        </androidx.drawerlayout.widget.DrawerLayout>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
 
             android:id="@+id/navigation_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/blueDark"
-            app:itemBackground="@color/primary_blue"
+            android:background="@color/colorPrimaryDark"
+            app:itemBackground="@color/colorPrimary"
             app:itemIconTint="@color/pf_white"
             app:itemTextColor="@color/pf_white"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -68,5 +58,14 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_drawer"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/navigation_drawer_item"></com.google.android.material.navigation.NavigationView>
+    </androidx.drawerlayout.widget.DrawerLayout>
+
 
 </layout>

@@ -7,10 +7,10 @@
     android:id="@+id/navigation_header"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@drawable/test"
     android:paddingEnd="20dp"
+    android:background="@drawable/header_image"
     android:paddingTop="20dp"
-    android:layout_height="wrap_content">
+    android:layout_height="150dp">
     <LinearLayout
         android:paddingTop="12dp"
         android:layout_width="match_parent"
@@ -28,30 +28,31 @@
         app:civ_border_width="1dp"
         />
         <TextView
-            android:id="@+id/team_name_header"
+            android:id="@+id/player_name_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/my_team"
+            android:text="Malek Hamad"
             android:layout_gravity="center"
             android:layout_marginStart="16sp"
             android:textStyle="bold"
-            android:textColor="@color/pf_white"
+            android:textColor="@android:color/white"
             android:textSize="20sp"
 
             />
 
     </LinearLayout>
     <TextView
-        android:id="@+id/player_name_header"
+        android:id="@+id/team_name_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Malek Hamad"
-        android:textColor="@color/pf_white"
-        android:textSize="15sp"
+        android:textColor="@android:color/black"
+        android:textSize="17sp"
+        android:visibility="gone"
         android:layout_marginStart="16dp"
         android:textStyle="italic"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="12dp"
         />
-
+\
 </LinearLayout></layout>

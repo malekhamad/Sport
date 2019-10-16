@@ -27,7 +27,7 @@ String userId = null;
             if(userId == null) {
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }else {
-                startActivity(new Intent(MainActivity.this,LoginActivity.class));
+                startActivity(new Intent(MainActivity.this,BasicActvity.class));
             }
               finish();
             }

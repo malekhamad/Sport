@@ -1,6 +1,7 @@
 package com.geniusmind.sport.View;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -53,6 +54,7 @@ public abstract class BaseBasicFragment extends AppCompatActivity  {
          @Override
          public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
              int id = menuItem.getItemId();
+
             getFragmentAfterSelected(id);
              return false;
          }
@@ -71,6 +73,7 @@ public abstract class BaseBasicFragment extends AppCompatActivity  {
          public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
              int id = menuItem.getItemId();
              getFragmentAfterSelected(id);
+             basicBinding.drawerLayout.closeDrawers();
              return false;
          }
      });
@@ -82,9 +85,11 @@ public abstract class BaseBasicFragment extends AppCompatActivity  {
         if(fragment == null){
             Fragment f = getFragment() ;
             manager.beginTransaction()
-                    .add(R.id.basic_container , f)
+                    .replace(R.id.basic_container , f)
                     .commit();
         }
+
+
 
     }
 

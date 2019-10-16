@@ -1,6 +1,7 @@
 package com.geniusmind.sport.View;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.util.Log;
@@ -26,7 +27,6 @@ public class BasicActvity extends BaseBasicFragment {
     public Fragment getFragment() {
         // basic fragment is myaccountfragment to tested . . . ;
         return MyAccountFragment.getInstance(Preferences.getPreferences(this,ContractClass.USER_FILE,ContractClass.USER_ID_KEY,null));
-
     }
 
     @Override
@@ -36,13 +36,13 @@ public class BasicActvity extends BaseBasicFragment {
                 Toast.makeText(this, "home", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.playground_item:
-                Toast.makeText(this, "playgrouond", Toast.LENGTH_SHORT).show();
+               replaceFragment(PlaygroundFragment.getInstance());
                 break;
             case R.id.find_team:
                 Toast.makeText(this, "find team", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.my_profile:
-                Toast.makeText(this, "my profile", Toast.LENGTH_SHORT).show();
+                 replaceFragment(ProfileFragment.newInstance());
                 break;
             case R.id.my_team:
                 Toast.makeText(this, "my team", Toast.LENGTH_SHORT).show();
@@ -92,5 +92,12 @@ public class BasicActvity extends BaseBasicFragment {
 
     }
 
+    public void replaceFragment(Fragment fragment){
+        FragmentManager manager = getSupportFragmentManager();
 
+            manager.beginTransaction()
+                    .replace(R.id.basic_container , fragment)
+                    .commit();
+        
+    }
 }
