@@ -1,7 +1,6 @@
 package com.geniusmind.sport.Model;
 
 public class UserRegister {
-
     private String fname ;
     private String lname ;
     private String team_name ;
@@ -10,7 +9,7 @@ public class UserRegister {
     private String c_password ;
     private String governorate ;
     private String date_birth ;
-    private int phone_number ;
+    private String phone_number ;
     private String sex ;
     private String image_base64 ;
 
@@ -88,11 +87,11 @@ public class UserRegister {
         this.date_birth = date_birth;
     }
 
-    public int getPhone_number() {
+    public String getPhone_number() {
         return phone_number;
     }
 
-    public void setPhone_number(int phone_number){
+    public void setPhone_number(String phone_number){
         this.phone_number = phone_number;
     }
 

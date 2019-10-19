@@ -5,8 +5,9 @@ import android.graphics.BitmapFactory;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
+import java.util.List;
 
-public class ConvertImage {
+public class imageHelper {
 
     // encode image to base 64 . . . ;
     public static String encodeImage(Bitmap bm)
@@ -25,4 +26,12 @@ public class ConvertImage {
         return  BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
     }
+
+    // fetch playground images as array . . . ;
+    public static String[] getPlaygroundImages(String images){
+        String [] imageList = images.split("&");
+        return imageList;
+
+    }
+
 }

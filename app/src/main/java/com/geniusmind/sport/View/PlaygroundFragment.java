@@ -20,6 +20,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.geniusmind.sport.Model.PlaygroundCallback;
+import com.geniusmind.sport.Model.playgroundInfo;
 import com.geniusmind.sport.R;
 import com.geniusmind.sport.ViewModel.PlaygroundViewModel;
 import com.geniusmind.sport.databinding.FragmentPlaygroundBinding;
@@ -38,6 +39,7 @@ public class PlaygroundFragment extends Fragment {
     PlaygroundRecyclerAdapter playgroundAdapter;
     PlaygroundViewModel playgroundViewModel;
 
+
     // to create object from this fragment . . . ;
     public static Fragment getInstance() {
         return new PlaygroundFragment();
@@ -47,8 +49,8 @@ public class PlaygroundFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // fake data . . . ;
-        infoList = new ArrayList<>();
+
+/*        infoList = new ArrayList<>();
 
         infoList.add(new PlaygroundCallback("Al-Yarmouk", new ArrayList<String>()
                 , "20", "2", "Amman-istiqlal", "7738434", "4349898", "10pm", "2am"));
@@ -57,7 +59,7 @@ public class PlaygroundFragment extends Fragment {
         infoList.add(new PlaygroundCallback("Al-Yarmouk3", new ArrayList<String>()
                 , "25", "2", "Amman-istiqlal", "7738434", "4349898", "10pm", "2am"));
         infoList.add(new PlaygroundCallback("Al-Yarmouk4", new ArrayList<String>()
-                , "22", "2", "Amman-istiqlal", "7738434", "4349898", "10pm", "2am"));
+                , "22", "2", "Amman-istiqlal", "7738434", "4349898", "10pm", "2am"));*/
 
         // Inflate the layout for this fragment
         playgroundBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_playground, container, false);
@@ -71,7 +73,7 @@ public class PlaygroundFragment extends Fragment {
         // create instance from PlaygroundViewModel . . . ;
         playgroundViewModel = ViewModelProviders.of(getActivity()).get(PlaygroundViewModel.class);
         playgroundBinding.playgroundRecyclerView.setAdapter(playgroundAdapter);
-        getAllPlayground();
+        getPlayground();
 
         return playgroundBinding.getRoot();
     }
@@ -90,7 +92,7 @@ public class PlaygroundFragment extends Fragment {
 
     // crete adapter for recycler view . . . .;
     public class PlaygroundRecyclerAdapter extends RecyclerView.Adapter<PlaygroundViewHolder> {
-        List<PlaygroundCallback> playgroundList = new ArrayList<>();
+        List<playgroundInfo> playgroundList = new ArrayList<>();
         Context context;
 
         public PlaygroundRecyclerAdapter(Context context) {
@@ -108,10 +110,12 @@ public class PlaygroundFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull PlaygroundViewHolder holder, int position) {
-            PlaygroundCallback playgroundInformation = playgroundList.get(position);
+            playgroundInfo playgroundInformation = playgroundList.get(position);
+
             holder.cardBinding.playgroundName.setText(playgroundInformation.getPlayground_name());
             holder.cardBinding.playgroundPlace.setText(playgroundInformation.getPlace());
             holder.cardBinding.playgroundRating.setRating(3.0f);
+            holder.cardBinding.hourPrice.setText(playgroundInformation.getPlayground_price()+"/JD");
             holder.cardBinding.playgroundImage.setImageResource(R.drawable.add_photo);
         }
 
@@ -120,21 +124,35 @@ public class PlaygroundFragment extends Fragment {
             return playgroundList.size();
         }
 
-        public void setPlaygroundList(ArrayList<PlaygroundCallback> playgroundList) {
-            this.playgroundList = playgroundList;
+
+        public void setPlaygroundList(PlaygroundCallback playgroundList) {
+
+            for(int i = 0 ; i<playgroundList.getPlaygroundList().size();i++){
+                this.playgroundList.add(playgroundList.getPlaygroundList().get(i));
+            }
             notifyDataSetChanged();
         }
     }
 
 
     /// getAllPlayground Method  using livedata . . . ;;
-    public void getAllPlayground() {
-        playgroundViewModel.getPlaygroundList("1").observe(getActivity(), new Observer<List<PlaygroundCallback>>() {
-            @Override
-            public void onChanged(List<PlaygroundCallback> playgroundCallbacks) {
-                playgroundAdapter.setPlaygroundList((ArrayList<PlaygroundCallback>) playgroundCallbacks);
-            }
-        });
+    public void getPlayground() {
+        String page = playgroundViewModel.getPage();
+        if(page == null){
+            // dismiss scroll bar witout any changes . . . ;
+        }else {
+
+            String[] pages = page.split("=");
+            page = pages[1];
+
+            playgroundViewModel.getPlaygroundList(page).observe(getActivity(), new Observer<PlaygroundCallback>() {
+                @Override
+                public void onChanged(PlaygroundCallback playgroundCallbacks) {
+                    playgroundAdapter.setPlaygroundList(playgroundCallbacks);
+                }
+            });
+
+        }
 
     }
 }

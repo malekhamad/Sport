@@ -10,14 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.geniusmind.sport.ContractClass;
-import com.geniusmind.sport.Helper.ConvertImage;
+import com.geniusmind.sport.Helper.imageHelper;
 import com.geniusmind.sport.Helper.Preferences;
 import com.geniusmind.sport.Model.ApiInterface;
 import com.geniusmind.sport.Model.ClientApi;
@@ -50,7 +49,7 @@ public class ProfileFragment extends Fragment {
         if (mViewModel.getProfileData().getUsername() == null) {
             setProfileData(getActivity());
         } else {
-            profileBinding.profileUserImage.setImageBitmap(ConvertImage.encodeBase64(mViewModel.getProfileData().getImg_src()));
+            profileBinding.profileUserImage.setImageBitmap(imageHelper.encodeBase64(mViewModel.getProfileData().getImg_src()));
             profileBinding.profileUsername.setText(mViewModel.getProfileData().getUsername());
             profileBinding.profileTeamName.setText(mViewModel.getProfileData().getTeam_name());
             profileBinding.profileEmail.setText(mViewModel.getProfileData().getEmail());
@@ -74,7 +73,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onResponse(Call<ProfileCallback> call, Response<ProfileCallback> response) {
                mViewModel.setProfileCallback(response.body());
-                profileBinding.profileUserImage.setImageBitmap(ConvertImage.encodeBase64(response.body().getImg_src()));
+                profileBinding.profileUserImage.setImageBitmap(imageHelper.encodeBase64(response.body().getImg_src()));
 
                 profileBinding.profileUsername.setText(response.body().getUsername());
                 profileBinding.profileTeamName.setText(response.body().getTeam_name());

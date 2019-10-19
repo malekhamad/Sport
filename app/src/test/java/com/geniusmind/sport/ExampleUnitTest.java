@@ -1,5 +1,7 @@
 package com.geniusmind.sport;
 
+import com.geniusmind.sport.Helper.imageHelper;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -11,7 +13,13 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+    public void addition_isCorrect()
+    {
+//        String []images =  imageHelper.getPlaygroundImages("1571409420.png&1571409420.png");
+//        String []expected = {"1571409420.png","1571409420.png"};
+//        assertArrayEquals(expected,images);
+
     }
+
+
 }

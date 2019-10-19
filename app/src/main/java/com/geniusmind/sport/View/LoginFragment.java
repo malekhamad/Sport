@@ -156,7 +156,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
                     }else {
 
-                       loginBinding.emailLoginLayout.setError("Your Email Or Password Incorrect !");
+                       loginBinding.emailLoginLayout.setError(response.body().getErrorMsg());
                        loginBinding.passwordLoginLayout.setError(" ");
                        loginBinding.loginLinearProgress.setVisibility(View.GONE);
 
@@ -166,6 +166,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onFailure(Call<LoginCallback> call, Throwable t) {
                     Log.i("call Failure",t.getMessage());
+                    loginBinding.loginLinearProgress.setVisibility(View.GONE);
+
                 }
             });
 

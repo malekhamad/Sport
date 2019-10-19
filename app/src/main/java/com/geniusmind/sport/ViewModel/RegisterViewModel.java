@@ -40,7 +40,7 @@ public class RegisterViewModel extends ViewModel {
             return 6;
         }else if (TextUtils.isEmpty(userInformation.getDate_birth())){
             return 7;
-        }else if(userInformation.getPhone_number() == 0){
+        }else if(TextUtils.isEmpty(userInformation.getPhone_number())){
             return 8;
         }else if(userInformation.getGovernorate().contains("governorate")
                 || userInformation.getGovernorate().contains("محافظة")){
@@ -72,7 +72,7 @@ public class RegisterViewModel extends ViewModel {
 
             ApiInterface registerService = ClientApi.getInstance().create(ApiInterface.class);
 
-            Call<LoginCallback> call = registerService.registerCall(userInformation.getImage_base64(), userInformation.getFname(), userInformation.getLname(), userInformation.getTeam_name(),
+            Call<LoginCallback> call = registerService.registerCall(userInformation.getImage_base64(), userInformation.getFname()+" "+ userInformation.getLname(), userInformation.getTeam_name(),
                     userInformation.getEmail(), userInformation.getPassword(), userInformation.getGovernorate(), userInformation.getDate_birth()
                     , userInformation.getPhone_number(), userInformation.getSex());
 

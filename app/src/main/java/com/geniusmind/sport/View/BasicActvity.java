@@ -9,8 +9,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.geniusmind.sport.ContractClass;
-import com.geniusmind.sport.Helper.ConvertImage;
+import com.geniusmind.sport.ContractUrl;
+import com.geniusmind.sport.Helper.imageHelper;
 import com.geniusmind.sport.Helper.Preferences;
 import com.geniusmind.sport.Model.UserBasicCallback;
 import com.geniusmind.sport.R;
@@ -81,7 +83,14 @@ public class BasicActvity extends BaseBasicFragment {
                TextView team_name = headerView.findViewById(R.id.team_name_header);
                player_name.setText(viewModel.getUserBasicInfo().getPlayername());
                team_name.setText(viewModel.getUserBasicInfo().getTeamname());
-               imageView.setImageBitmap(ConvertImage.encodeBase64(viewModel.getUserBasicInfo().getPlayerImage()));
+             //  imageView.setImageBitmap(imageHelper.encodeBase64(viewModel.getUserBasicInfo().getPlayerImage()));
+
+               Log.i("image",ContractUrl.imageBaseUrl+""+viewModel.getUserBasicInfo().getPlayerImage());
+               // use glide to load image view . . . . ;
+               Glide.with(getApplicationContext())
+                       .load(ContractUrl.imageBaseUrl+""+viewModel.getUserBasicInfo().getPlayerImage())
+                       .centerCrop()
+                       .into(imageView);
            }
 
            @Override

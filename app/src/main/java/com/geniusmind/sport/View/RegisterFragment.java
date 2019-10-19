@@ -166,11 +166,11 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         return userrInfo;
             }
     // convert phone text to string .. . :
-    public int convertPhone(){
+    public String convertPhone(){
         if(TextUtils.isEmpty(binding.phoneNumber.getText()) || binding.phoneNumber.getText().toString() == null){
-            return 0;
+            return "";
         }else {
-            return Integer.parseInt(binding.phoneNumber.getText().toString());
+            return binding.phoneNumber.getText().toString();
         }
     }
 
@@ -204,6 +204,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                   registerViewModel.passDataToTheDatabase().enqueue(new Callback<LoginCallback>() {
                      @Override
                      public void onResponse(Call<LoginCallback> call, Response<LoginCallback> response) {
+String a = "";
                          String status = response.body().getStatus();
                          final String user_id = response.body().getId();
                          switch (status){
@@ -226,9 +227,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                                  snackbar.show();
 
                                  break;
-                             case "existemail":
-                                 Toast.makeText(view.getContext(), getString(R.string.email_exist), Toast.LENGTH_SHORT).show();
-                                 binding.emailLayout.setError(getString(R.string.email_exist));
+                             case "failure":
+                                 Toast.makeText(view.getContext(),response.body().getErrorMsg(), Toast.LENGTH_SHORT).show();
+                               //  binding.emailLayout.setError(getString(R.string.email_exist));
                                  binding.registerRelativeProgress.setVisibility(View.GONE);
 
                                  break;
@@ -244,6 +245,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                      @Override
                      public void onFailure(Call<LoginCallback> call, Throwable t) {
                          Log.i("Registerfailure",t.getMessage());
+                         binding.registerRelativeProgress.setVisibility(View.GONE);
+
                      }
                  });
               }
